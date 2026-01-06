@@ -1,8 +1,14 @@
+'use client'
 import React from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import logo from '@/assets/images/logo.png'
 const Footer = () => {
-    const currentYear= new Date().getFullYear()
+    const [currentYear, setCurrentYear] = useState('')
+    
+    useEffect(() => {
+      setCurrentYear(new Date().getFullYear())
+    }, [])
   return (
     <footer className="bg-gray-200 py-4 mt-24">
     <div
