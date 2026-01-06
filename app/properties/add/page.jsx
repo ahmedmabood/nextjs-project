@@ -1,9 +1,12 @@
-import React from 'react'
+
 
 const propertyAddpage = () => {
-  return (
-    <div>propertyAddpage</div>
-  )
+
 }
 
 export default propertyAddpage
+
+
+
+
+// explaijn why in dependecyy property
