@@ -13,12 +13,13 @@ export const metadata={
 const MainLayout = ({children}) => {
   return (
     <AuthProvider>    
-      <html lang='en'><body>
+      <html lang='en'><body suppressHydrationWarning>
         <Navbar />
         <main>{children}</main>
         <Footer />
     </body>
-    </html></AuthProvider>
+    </html>
+    </AuthProvider>
 
   
   )

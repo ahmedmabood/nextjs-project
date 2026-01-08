@@ -3,8 +3,8 @@ import React from 'react'
 import { useEffect,useState } from 'react'
 import { useParams } from 'next/navigation'
 import { fetchProperty } from '@/utils/request'
-
- import PropertyHeader from '@/components/PropertyHeader'
+import PropertyImages from '@/components/propertyImages'
+import PropertyHeader from '@/components/PropertyHeader'
 import PropertyDeails from '@/components/PropertyDeails'
 import Link from 'next/link'
 import { FaArrowLeft, FaBookmark, FaShare, FaPaperPlane } from 'react-icons/fa'
@@ -144,6 +144,7 @@ const PropertyPage = () => {
         </div>
       </div>
     </section>
+    <PropertyImages images={property.images} />
       </>
     )}
 

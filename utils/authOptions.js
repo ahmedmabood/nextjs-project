@@ -16,7 +16,7 @@ export const authOptions={
     })
     ],
     callbacks:{
-        async signin({profile}){
+        async signIn({profile}){
         await connectDB()
         const userExist= await User.findOne({email:profile.email})
         if(!userExist){
@@ -28,8 +28,9 @@ export const authOptions={
                 image:profile.picture
             })
 
-            return true
+         
         }
+           return true
         },
         async session({session}){
             const user = await User.findOne({email:session.user.email})
