@@ -24,13 +24,14 @@ export const POST=async(request)=>{
 
 
         const sessionUser= await getSessionUser()
-        if(!sessionUser ||!sessionUser.user){
+        
+        if(!sessionUser ||!sessionUser.userId){
            return new Response('User ID is required',{status:401}) 
         }
         const{userId}=sessionUser
         const formData=await request.formData()
-        const amenities=formData.getALL('amenities')
-        const images=formData.getALL('images').filter((image)=>image.name!=='')
+        const amenities=formData.getAll('amenities')
+        const images=formData.getAll('images').filter((image)=>image.name!=='')
 
 
         const propertyData={
@@ -59,10 +60,7 @@ export const POST=async(request)=>{
              },
              owner:userId,
         }
-        const newProperty=new Property(propertyData)
-        await newProperty.save()
-        return Response.redirect(`${process.env.NEXTAUTH_URL}/properties/${newProperty._id}}`)
-        const imageUploadPromises=[]
+                const imageUploadPromises=[]
         for (const image of images){
             const imageBuffer=await image.arrayBuffer()
             const imageArray=Array.from(new Uint8Array(imageBuffer))
@@ -76,10 +74,16 @@ export const POST=async(request)=>{
             propertyData.images=uploadedImages
         }
 
+        const newProperty=new Property(propertyData)
+        await newProperty.save()
+        return Response.redirect(`${process.env.NEXTAUTH_URL}/properties/${newProperty._id}`)
+
 
         // return new Response(JSON.stringify({message:'message'}),{status:200})
         
     } catch (error) {
+        console.log(error)
+
         return new Response('failed to add propert',{status:500})
     }
 }

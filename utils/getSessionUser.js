@@ -10,7 +10,7 @@ export const getSessionUser= async()=>{
     
                 return{
                     user:session.user,
-                    userId:session.user
+                    userId:session.user.id
                 }
         } catch (error) {
             return null
