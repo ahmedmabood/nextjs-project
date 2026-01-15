@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useState,useEffect } from 'react'
-import PageLoader from 'next/dist/client/page-loader'
+import { ClipLoader } from 'react-spinners'
 import PropertyCard from '@/components/PropertyCard'
 
 const SavedpropertiesPage = () => {
@@ -28,7 +28,11 @@ const SavedpropertiesPage = () => {
         }
         fetchSvedProperties()
     },[])
-  return loading ?(<PageLoader  />):(
+  return loading ? (
+    <div className="flex justify-center items-center min-h-screen">
+      <ClipLoader color="#3b82f6" size={150} />
+    </div>
+  ) : (
        <section className="px-4 py-6">
       <div className="container-xl lg:container m-auto px-4 py-6">
         <h1 className="text-2xl mb-4">Saved Properties</h1>
