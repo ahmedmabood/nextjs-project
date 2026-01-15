@@ -1,15 +1,18 @@
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
-import { getSessionUser } from "@/utils/getSessionUser";
-import cloudinary from "@/config/cloudinary";
 
-// GET /api/properties
-export const GET=async(request)=>{
+
+// GET /api/properties/user/:userID
+export const GET=async(request,{params})=>{
 
     try {
         await connectDB();
+        const { userId } = await params
+        if(!userId){
+            return new Response('User Id is required',{status:400})
+        }
         
-        const properties = await Property.find({})
+        const properties = await Property.find({owner:userId})
         
         return new Response(JSON.stringify({properties }),{status:200});     
         
@@ -54,9 +57,9 @@ export const POST=async(request)=>{
                 nightly:formData.get('rates.nightly'),
              },
              seller_info:{
-                name:formData.get('seller_info.name'),
-                email:formData.get('seller_info.email'),
-                phone:formData.get('seller_info.phone'),
+                name:formData.get('name'),
+                email:formData.get('email'),
+                phone:formData.get('phone'),
              },
              owner:userId,
         }
